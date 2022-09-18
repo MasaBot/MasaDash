@@ -53,6 +53,14 @@
     gap: 20px;
 }
 
+.serverTitleContainer {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    height: 60px;
+}
+
 .headerInput {
     cursor: text;
     border: none;
@@ -66,8 +74,6 @@
     color: white;
     font-weight: 800;
     font-size: 32px;
-    margin: 20px 0 20px 0;
-    margin-left: 20px;
 }
 .headerInput:enabled {
     border-bottom: 2px solid var(--highlight);

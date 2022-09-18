@@ -2,7 +2,8 @@ import { socket } from "./connectWS";
 
 export enum ServerStatus {
   Online = "online",
-  Offline = "offline"
+  Offline = "offline",
+  Unknown = "unknown"
 }
 
 type SubscriptionUpdateFunction = (status: ServerStatus) => void;

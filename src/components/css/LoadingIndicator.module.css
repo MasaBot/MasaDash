@@ -21,3 +21,12 @@
     transform: scale(.2);
   }
 }
+
+
+.textIndicator {
+  height: 1em;
+  background: linear-gradient(90deg, #464646, #999999);
+  opacity: .8;
+	animation: gradient 2s ease infinite;
+  border-radius: 3px;
+}

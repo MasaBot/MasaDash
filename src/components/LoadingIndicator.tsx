@@ -9,3 +9,9 @@ export default function LoadingIndicator() {
       </div>
     )
 }
+
+export function LoadingText(props: {length?: number}) {
+  return (
+    <div className={styles.textIndicator} style={{width: props.length || 15 + "ex"}}></div>
+  )
+}

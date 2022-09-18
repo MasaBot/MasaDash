@@ -39,6 +39,14 @@ button:hover {
     transform: scale(1.02);
     background: var(--highlight-dark);
 }
+button:disabled {
+    background: #464646;
+    color: #d3d3d3;
+    cursor: not-allowed;
+}
+button:disabled:hover {
+    transform: none;
+}
 
 .loadingBackground {
     animation: loadingBackground 1s linear 0s infinite normal none;

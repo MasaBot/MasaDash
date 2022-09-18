@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom"
+import { LoadingText } from "../../components/LoadingIndicator";
 import StatusControl from "../../components/StatusControl";
 import ValueTile from "../../components/ValueTile";
 import changeServerName from "../../utils/changeServerName";
@@ -11,7 +12,7 @@ import DashboardLayout from "./Layout";
 export default function DashboardOverviewPage() {
 
     const [serverMeta, setServerMeta] = useState<ServerMeta | null>(null)
-    const [serverName, setServerName] = useState("Loading...");
+    const [serverName, setServerName] = useState<string | null>(null);
     const [isNameEditable, setNameEditable] = useState(false);
 
     const nameInputRef = useRef<HTMLInputElement>(null);
@@ -35,6 +36,7 @@ export default function DashboardOverviewPage() {
         <DashboardLayout pageName={"Overview"}>
             <form onSubmit={async e => {
                 e.preventDefault()
+                if (!serverName) return;
                 try {
                     await changeServerName(tag, serverName);
                     setServerMeta(oldMeta => {
@@ -46,11 +48,21 @@ export default function DashboardOverviewPage() {
                     setNameEditable(false);
                 } catch (err) {}
             }}>
-                <button type="button" className="material-symbols-outlined" onClick={e => setNameEditable(!isNameEditable)}>
-                    edit
-                </button>
-                <input disabled={!isNameEditable} ref={nameInputRef} className={styles.headerInput} value={serverName} onChange={e => setServerName(e.target.value)} maxLength={20} />
-                
+                <div className={styles.serverTitleContainer}>
+                    <button disabled={!serverName} type="button" className="material-symbols-outlined" onClick={e => setNameEditable(!isNameEditable)}>
+                        edit
+                    </button>
+                    {
+                        serverName ? <input
+                            disabled={!isNameEditable}
+                            ref={nameInputRef}
+                            className={styles.headerInput}
+                            value={serverName ?? "dsfdsdsf"}
+                            onChange={e => setServerName(e.target.value)}
+                            maxLength={20}
+                        /> : <h1><LoadingText/></h1>
+                    }
+                </div>
                 <div className={styles.editSaveCancel} style={{
                     display: !isNameEditable ? "none" : "flex"
                 }}>
