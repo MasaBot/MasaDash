@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom"
+import IconButton from "../../components/IconButton";
 import { LoadingText } from "../../components/LoadingIndicator";
 import StatusControl from "../../components/StatusControl";
 import ValueTile from "../../components/ValueTile";
@@ -49,9 +50,7 @@ export default function DashboardOverviewPage() {
                 } catch (err) {}
             }}>
                 <div className={styles.serverTitleContainer}>
-                    <button disabled={!serverName} type="button" className="material-symbols-outlined" onClick={e => setNameEditable(!isNameEditable)}>
-                        edit
-                    </button>
+                    <IconButton icon="edit" disabled={!serverName} onClick={e => setNameEditable(!isNameEditable)} type="button"/>
                     {
                         serverName ? <input
                             disabled={!isNameEditable}

@@ -74,13 +74,19 @@
 }
 
 .beta {
-  position: fixed;
-  top: 20px;
-  right: 20px;
   text-transform: uppercase;
   background: white;
   color: black;
   padding: 5px 10px;
   border-radius: 20px;
   user-select: none;
+}
+.topRight {
+  position: fixed;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  top: 20px;
+  right: 20px;
+  gap: 20px;
 }

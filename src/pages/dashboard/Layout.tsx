@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import IconButton from "../../components/IconButton";
 import styles from "../css/Layout.module.css";
 
 export default function DashboardLayout(props: {children: React.ReactNode, pageName: string}) {
@@ -28,7 +29,10 @@ export default function DashboardLayout(props: {children: React.ReactNode, pageN
         <span className={styles.footerVersion}>0.0.1</span>
       </footer>
 
-      <span className={styles.beta}>beta</span>
+      <div className={styles.topRight}>
+        <Link to="/settings"><IconButton icon="settings"/></Link>
+        <span className={styles.beta}>beta</span>
+      </div>
     </div>
   )
 }
