@@ -3,9 +3,12 @@
 :root {
     --background-dark: #030618;
     --background-light: #060a1f;
-    --text-color: white;
+    --background-lightest: #78A1BB;
+    --text-color: #E7E7E7;
     --highlight: #Bc1930;
     --highlight-dark: #991627;
+    --function-disabled-bg: #464646;
+    --function-disabled-fg: #d3d3d3;
 }
 
 body {
@@ -40,8 +43,8 @@ button:hover {
     background: var(--highlight-dark);
 }
 button:disabled {
-    background: #464646;
-    color: #d3d3d3;
+    background: var(--function-disabled-bg);
+    color: var(--function-disabled-fg);
     cursor: not-allowed;
 }
 button:disabled:hover {
