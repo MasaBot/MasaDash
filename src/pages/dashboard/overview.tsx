@@ -1,5 +1,7 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom"
+import EditableText from "../../components/EditableText";
 import IconButton from "../../components/IconButton";
 import { LoadingText } from "../../components/LoadingIndicator";
 import StatusControl from "../../components/StatusControl";
@@ -52,7 +54,7 @@ export default function DashboardOverviewPage() {
                 <div className={styles.serverTitleContainer}>
                     <IconButton icon="edit" disabled={!serverName} onClick={e => setNameEditable(!isNameEditable)} type="button"/>
                     {
-                        serverName ? <input
+                        serverName !== null ? <input
                             disabled={!isNameEditable}
                             ref={nameInputRef}
                             className={styles.headerInput}
@@ -73,6 +75,23 @@ export default function DashboardOverviewPage() {
                 </div>
             </form>
             <StatusControl tag={tag} />
+            <h2>Settings</h2>
+            <form>
+                <table className={styles.settingsTable}>
+                    <tbody>
+                        <tr>
+                            <td>Port</td>
+                            <td><EditableText disabled type="number" maxLength={5} max={65535} min={1}/></td>
+                        </tr>
+                        <tr>
+                            <td>Description</td>
+                            <td><EditableText disabled/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit" style={{width: 100}}>Save</button>
+            </form>
+            <h2>Stats</h2>
             <div className={styles.tiles}>
                 <ValueTile valueName={"Processor"} value={"56%"} percentage={0.56} />
                 <ValueTile valueName={"Memory"} value={"79%"} percentage={0.79} />

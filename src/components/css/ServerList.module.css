@@ -23,3 +23,7 @@
   margin: 0;
   background: var(--background-light);
 }
+
+.header {
+  text-align: center;
+}

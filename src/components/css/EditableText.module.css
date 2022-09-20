@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+}
+.container input[type=text] {
+    outline: none;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: medium;
+    font-family: "Sen", sans-serif;
+}
+.container input[type=text]:focus {
+    border-bottom: 2px solid var(--highlight);
+}

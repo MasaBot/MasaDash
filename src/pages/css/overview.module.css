@@ -90,3 +90,11 @@
 .editCancel {
     background: #373737;
 }
+
+.settingsTable {
+    width: 60%;
+}
+.settingsTable tbody tr {
+    display: flex;
+    justify-content: space-between;
+}

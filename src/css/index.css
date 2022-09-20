@@ -9,6 +9,7 @@
     --highlight-dark: #991627;
     --function-disabled-bg: #464646;
     --function-disabled-fg: #d3d3d3;
+    --button-border-radius: 10px;
 }
 
 body {
@@ -31,7 +32,7 @@ button {
     padding: 10px;
     background: var(--highlight);
     color: var(--text-color);
-    border-radius: 10px;
+    border-radius: var(--button-border-radius);
     border: none;
     outline: none;
     cursor: pointer;

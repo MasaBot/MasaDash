@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import styles from "./css/settings.module.css";
 
 const themes = {
     DARK_AS_DEFAULT: {
@@ -12,7 +15,7 @@ const themes = {
     },
     DREAMING: {
         "--background-dark": "#a2d2ff",
-        "--background-light": "#bde0fe",
+        "--background-light": "red",
         "--text-color": "#393D3F",
         "--highlight": "#ffc8dd",
         "--highlight-dark": "#ffafcc",
@@ -34,6 +37,8 @@ export default function SettingsPage() {
 
     const [currentTheme, setCurrentTheme] = useState<keyof typeof themes>("DARK_AS_DEFAULT");
 
+    const navigate = useNavigate();
+
     function themeChange(e: React.ChangeEvent<HTMLInputElement>) {
         setCurrentTheme(e.target.value as keyof typeof themes);
     }
@@ -42,34 +47,46 @@ export default function SettingsPage() {
     }
 
     return (
-        <form onSubmit={e => {
-            e.preventDefault()
-            const root = document.querySelector(":root") as HTMLHtmlElement;
-            const theme = themes[currentTheme];
+        <div className={styles.container}>
+            <h1>Themes</h1>
+            <form className={styles.themes} onSubmit={e => {
+                e.preventDefault()
+                const root = document.querySelector(":root") as HTMLHtmlElement;
+                const theme = themes[currentTheme];
 
-            for (const property in theme) {
-                if (Object.prototype.hasOwnProperty.call(theme, property)) {
-                    if (!property.startsWith("--")) continue;
-                    const color = theme[property as keyof typeof theme];
+                for (const property in theme) {
+                    if (Object.prototype.hasOwnProperty.call(theme, property)) {
+                        if (!property.startsWith("--")) continue;
+                        const color = theme[property as keyof typeof theme];
 
-                    root.style.setProperty(property, color);
+                        root.style.setProperty(property, color);
+                    }
                 }
-            }
-        }}>
-            {
-                Object.entries(themes).map(([key, value]) => {
-                    return (
-                        <>
-                            <label>
-                                {key.split("_").map(str => str.substring(0, 1) + str.substring(1).toLowerCase()).join(" ")}
-                            </label>
-                            <input key={key} type="radio" value={key} onChange={themeChange} checked={isChecked(key)} />
-                            <hr />
-                        </>
-                    )
-                })
-            }
-            <button type="submit">Save</button>
-        </form>
+            }}>
+                <div className={styles.themesBox}>
+                    {
+                        Object.entries(themes).map(([key, value]) => {
+                            return (
+                                <>
+                                    <div className={styles.radioContainer}>
+                                        <div className={styles.colorContainer} style={{
+                                            borderTopColor: value["--background-light"],
+                                            borderLeftColor: value["--background-light"],
+                                            borderBottomColor: value["--background-dark"],
+                                            borderRightColor: value["--background-dark"],
+                                            backgroundColor: value["--highlight"]
+                                        }}>
+                                            <span className={styles.checkedIndicator + " material-symbols-outlined"}>{isChecked(key) ? "check" : ""}</span>
+                                        </div>
+                                        <input key={key} type="radio" value={key} onChange={themeChange} checked={isChecked(key)} />
+                                    </div>
+                                </>
+                            )
+                        })
+                    }
+                </div>
+                <button type="submit" style={{width: 100}}>Save</button>
+            </form>
+        </div>
     );
 }
